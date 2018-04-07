@@ -2,17 +2,65 @@
     <head>
         <title>Vue.js Pet Depot</title>
         <script src="https://unpkg.com/vue"></script>
-        <link rel="stylesheet" type="text/css" href="assets/css/app.css"/>
-        <link rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-            crossorigin="anonymous">
     </head>
     <body>
-        <div id="app"></div>
-
+        <div id="app">
+            <header>
+                <h1 v-text="sitename"></h1>
+            </header>
+        </div>
         <script type="text/javascript">
+            // flag defined outside Vue instance so it is available
+            // for events like beforeCreate
+            var APP_LOG_LIFECYCLE_EVENTS = true;
             var webstore = new Vue({
-                el: '#app'
+                el: '#app',
+                data: {
+                    sitename: 'Vue.js Pet Depot'
+                },
+                // lifecycle events creating/updating/destroying
+                beforeCreate: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("beforeCreate");
+                    }
+                },
+                created: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("created");
+                    }
+                },
+                beforeMount: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("beforeMount");
+                    }
+                },
+                mounted: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("mounted");
+                    }
+                },
+                // updating, i.e: webstore.sitename = "test";
+                beforeUpdate: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("beforeUpdate");
+                    }
+                },
+                updated: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("updated");
+                    }
+                },
+                // to destroy the vue app use webstore.$destroy();
+                beforeDestroy: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("beforeDestroy");
+                    }
+                },
+                destroyed: function() {
+                    if (APP_LOG_LIFECYCLE_EVENTS) {
+                        console.log("destroyed");
+                    }
+                }
             });
         </script>
     </body>
